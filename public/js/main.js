@@ -18,11 +18,15 @@ Animal = {
   all: function(){
     $.get(endpoint).done(function(data){
       console.log(data);
-      render(data);
+      View.render(data);
     })
   },
   create: function(animalParams){
-    console.log('Posting to server: ' animalParams);
+    console.log('Posting to server: ' + animalParams);
+    $.post(endpoint, animalParams)
+    .done(function(response){
+      console.log('Received from server: ' + response);
+    })
   }
 
 }
@@ -33,22 +37,21 @@ View = {
       event.preventDefault();
       Animal.create($(this).serialize());
     })   
+  },
+  render: function (data){
+  // $animalList.empty();
+    $.each(data, function(i, animal){
+      var template = '<li>'
+      template += '<h3>' + animal.name + '</h3>'
+      template += '<ul>'
+      template += '<li><strong>' + 'Breed: </strong>' + animal.breed + '</li>'
+      template += '<li><strong>' + 'Dob: </strong>' + animal.dob + '</li>'
+      template += '<li><strong>' + 'Gender: </strong>' + animal.gender + '</li>'
+      template += '<li><strong>' + 'Family: </strong>' + animal.family + '</li>'
+      template += '<li><strong>' + 'Status: </strong>' + animal.status + '</li>'
+      template += '</ul>'
+      template += '</li>';
+      $animalList.append(template);
+    })
   }
-}
-
-function render(data){
-  $animalList.empty();
-  $.each(data, function(i, animal){
-    var result = '<li>'
-    result += '<h3>' + animal.name + '</h3>'
-    result += '<ul>'
-    result += '<li><strong>' + 'Breed: </strong>' + animal.breed + '</li>'
-    result += '<li><strong>' + 'Dob: </strong>' + animal.dob + '</li>'
-    result += '<li><strong>' + 'Gender: </strong>' + animal.gender + '</li>'
-    result += '<li><strong>' + 'Family: </strong>' + animal.family + '</li>'
-    result += '<li><strong>' + 'Status: </strong>' + animal.status + '</li>'
-    result += '</ul>'
-    result += '</li>';
-    $animalList.append(result);
-  })
 }

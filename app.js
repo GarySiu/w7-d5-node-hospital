@@ -3,7 +3,6 @@ var path = require('path');
 var debug = require("debug");
 var logger = require('morgan');
 var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var app = express();
 
@@ -36,7 +35,6 @@ var Animal = require('./models/animals');
 
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(__dirname + '/public'));
 app.use(expressLayouts);
