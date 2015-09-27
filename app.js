@@ -15,11 +15,6 @@ moongoose.connect('mongodb://localhost/animalshelter');
 var animalsRes = require ('./animalsRoute');
 app.use('/animals', animalsRes);
 
-// root renders index
-app.get('/', function(req, res){
-  res.render('index')
-})
-
 // setup the animals model
 var Animal = require('./models/animals');
 
@@ -46,6 +41,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
+app.set('layout', 'layout');
+
+// root renders index
+app.get('/', function(req, res){
+  res.render('index')
+})
 
 // development error handler
 // will print stacktrace
