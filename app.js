@@ -6,10 +6,19 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var app = express();
-var router = express.Router();
 
 var moongoose = require('mongoose');
 moongoose.connect('mongodb://localhost/animalshelter');
+
+
+// setup modular routing for the animals resource
+var animals = require ('./animals');
+app.use('/animals', animals);
+
+// rout the root to /animals
+app.get('/', function(req, res){
+  res.redirect('/animals')
+})
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,10 +26,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-
-app.get('/', function(req, res){
-  res.render('blah')
-})
 
 // development error handler
 // will print stacktrace
