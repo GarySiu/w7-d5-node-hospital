@@ -25,7 +25,7 @@ var Animal = require('./models/animals');
 //   breed: 'Shiba Inu',
 //   dob: new Date("<2014/1/1>"),
 //   gender: 'M',
-//   family: '1',
+//   family: 'Dog',
 //   status: 'Adopted'
 // })
 
