@@ -12,13 +12,33 @@ moongoose.connect('mongodb://localhost/animalshelter');
 
 
 // setup modular routing for the animals resource
-var animals = require ('./animals');
-app.use('/animals', animals);
+var animalsRes = require ('./animalsRoute');
+app.use('/animals', animalsRes);
 
-// rout the root to /animals
+// route the root to /animals
 app.get('/', function(req, res){
   res.redirect('/animals')
 })
+
+// setup the animals model
+var Animal = require('./models/animals');
+
+// test code to save one animal in the mongodb
+
+var doge = Animal({
+  name: 'Doge',
+  breed: 'Shiba Inu',
+  dob: new Date("<2014/1/1>"),
+  gender: 'M',
+  family: '1',
+  status: 'Adopted'
+})
+
+doge.save(function(err){
+  if(err) console.log(err);
+  console.log('Animal has been created!');
+})
+
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
