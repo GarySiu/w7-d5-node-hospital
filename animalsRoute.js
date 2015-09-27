@@ -13,4 +13,11 @@ router.get('/', function(req, res) {
 
 });
 
+// CREATE
+
+router.post('/', function(req, res){
+  console.log('Data being posted to /animals');
+  res.json(req);
+})
+
 module.exports = router;
