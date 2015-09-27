@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
+var Animal = require('./models/animals')
 
-// define the home page route
+// INDEX
 router.get('/', function(req, res) {
-  res.render('index');
+
+  Animal.find({}, function(err, animals){
+    if(err) console.log(err)
+    // res.render('index');
+    res.json(animals);
+  })
+
 });
 
 module.exports = router;
