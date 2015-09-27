@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
+var moongoose = require('mongoose');
+moongoose.connect('mongodb://localhost/animalshelter');
 var Animal = require('./models/animals')
+
 var bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: false }));
 
@@ -20,7 +24,25 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res){
   console.log('Data being posted to /animals:');
   console.log(req.body);
+  //the default for new arrivals is for them to be orphans
+  req.body.status = "orphan";
   res.json(req.body);
 })
+
+// test code to save one animal in the mongodb
+
+// var doge = Animal({
+//   name: 'Doge',
+//   breed: 'Shiba Inu',
+//   dob: '2014-12-31',
+//   gender: 'M',
+//   family: 'Dog',
+//   status: 'adopted'
+// })
+
+// doge.save(function(err){
+//   if(err) console.log(err);
+//   console.log('Animal has been created!');
+// })
 
 module.exports = router;

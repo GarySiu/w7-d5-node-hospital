@@ -25,7 +25,9 @@ Animal = {
     console.log('Posting to server: ' + animalParams);
     $.post(endpoint, animalParams)
     .done(function(response){
-      console.log('Received from server: ' + response);
+      console.log('Received from server: ');
+      console.log(response);
+      View.render([response]);
     })
   }
 
