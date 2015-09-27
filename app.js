@@ -38,10 +38,10 @@ var Animal = require('./models/animals');
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(__dirname + '/public'));
 app.use(expressLayouts);
 app.engine('ejs', require('ejs').renderFile);
 app.set('view engine', 'ejs');
-app.set('layout', 'layout');
 
 // root renders index
 app.get('/', function(req, res){
