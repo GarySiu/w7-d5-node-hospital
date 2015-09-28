@@ -28,6 +28,7 @@ Animal = {
       console.log('Received from server: ');
       console.log(response);
       View.render([response]);
+      $animalForm.trigger('reset');
     })
   }
 
@@ -50,7 +51,11 @@ View = {
       template += '<li><strong>' + 'Dob: </strong>' + animal.dob + '</li>'
       template += '<li><strong>' + 'Gender: </strong>' + animal.gender + '</li>'
       template += '<li><strong>' + 'Family: </strong>' + animal.family + '</li>'
-      template += '<li><strong>' + 'Status: </strong>' + animal.status + '</li>'
+      if(animal.status === 'adopted') {
+        template += '<li><a href="#" class="adopt-link" data-id="' + animal._id + '">Abandon</li>'
+      } else {
+        template += '<li><a href="#" class="adopt-link" data-id="' + animal._id + '">Adopt</li>'
+      }
       template += '</ul>'
       template += '</li>';
       $animalList.append(template);

@@ -24,9 +24,23 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res){
   console.log('Data being posted to /animals:');
   console.log(req.body);
+
+  var data = req.body;
+  var newAnimal = new Animal({
+    name: data.name,
+    breed: data.breed,
+    dob: data.dob,
+    gender: data.gender,
+    family: data.family,
   //the default for new arrivals is for them to be orphans
-  req.body.status = "orphan";
-  res.json(req.body);
+    status: 'orphan'
+  })
+
+  newAnimal.save(function (err) {
+    if(err) console.log(err);
+    console.log('Animal has been created!');
+  });
+  res.json(newAnimal);
 })
 
 // test code to save one animal in the mongodb
