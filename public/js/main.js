@@ -39,16 +39,17 @@ View = {
     $animalForm.on('submit', function(){
       event.preventDefault();
       Animal.create($(this).serialize());
-    })   
+    });
   },
   render: function (data){
   // $animalList.empty();
     $.each(data, function(i, animal){
+      var dob = new Date(animal.dob);
       var template = '<li>'
       template += '<h3>' + animal.name + '</h3>'
       template += '<ul>'
       template += '<li><strong>' + 'Breed: </strong>' + animal.breed + '</li>'
-      template += '<li><strong>' + 'Dob: </strong>' + animal.dob + '</li>'
+      template += '<li><strong>' + 'Dob: </strong>' + dob.toDateString() + '</li>'
       template += '<li><strong>' + 'Gender: </strong>' + animal.gender + '</li>'
       template += '<li><strong>' + 'Family: </strong>' + animal.family + '</li>'
       if(animal.status === 'adopted') {
