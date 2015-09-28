@@ -42,7 +42,6 @@ View = {
     });
   },
   render: function (data){
-  // $animalList.empty();
     $.each(data, function(i, animal){
       var dob = new Date(animal.dob);
       var template = '<li>'
@@ -59,7 +58,7 @@ View = {
       }
       template += '</ul>'
       template += '</li>';
-      $animalList.append(template);
+      $animalList.prepend(template);
     })
   }
 }
