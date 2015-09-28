@@ -36,11 +36,11 @@ router.post('/', function(req, res){
     status: 'orphan'
   })
 
-  newAnimal.save(function (err) {
+  newAnimal.save(function (err, animal) {
     if(err) console.log(err);
     console.log('Animal has been created!');
+  res.json(animal);
   });
-  res.json(newAnimal);
 })
 
 // UPDATE
@@ -52,7 +52,7 @@ router.put('/:id', function(req, res){
   var outcome;
   req.body.status === 'orphan' ? outcome = 'adopted' : outcome = 'orphan';
 
-  Animal.findByIdAndUpdate({_id: req.params.id}, {status: outcome}, {}, function(err, result){
+  Animal.findByIdAndUpdate(req.params.id, {status: outcome}, {}, function(err, result){
     if(err) console.log(err);
     res.json(result);
   })

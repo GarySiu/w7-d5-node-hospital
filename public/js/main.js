@@ -66,9 +66,9 @@ View = {
       template += '<li><strong>' + 'Gender: </strong>' + animal.gender + '</li>'
       template += '<li><strong>' + 'Family: </strong>' + animal.family + '</li>'
       if(animal.status === 'adopted') {
-        template += '<li><a href="#" class="adopt-link" data-status="adopted" data-id="' + animal._id + '">Abandon</li>'
+        template += '<li><a href="#" class="adopt-link pure-button" data-status="adopted" data-id="' + animal._id + '">Abandon</li>'
       } else {
-        template += '<li><a href="#" class="adopt-link" data-status="orphan" data-id="' + animal._id + '">Adopt</li>'
+        template += '<li><a href="#" class="adopt-link pure-button" data-status="orphan" data-id="' + animal._id + '">Adopt</li>'
       }
       template += '</ul>'
       template += '</li>';
