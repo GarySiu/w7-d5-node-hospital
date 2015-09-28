@@ -40,11 +40,25 @@ View = {
       event.preventDefault();
       Animal.create($(this).serialize());
     });
+
+    $('body').on('click', '.adopt-link', function(){
+      event.preventDefault();
+        element = $(this);
+      $.ajax({
+        url: endpoint + '/' + element.data('id'),
+        method: 'put',
+        data: { status: element.data('status')}
+      })
+      .done(function(response){
+        console.log(response);
+        element.text() === 'Adopt' ? element.text('Abandon') : element.text('Adopt');
+      })
+    })
   },
   render: function (data){
     $.each(data, function(i, animal){
       var dob = new Date(animal.dob);
-      var template = '<li>'
+      var template = '<li class="pet">'
       template += '<h3>' + animal.name + '</h3>'
       template += '<ul>'
       template += '<li><strong>' + 'Breed: </strong>' + animal.breed + '</li>'
@@ -52,9 +66,9 @@ View = {
       template += '<li><strong>' + 'Gender: </strong>' + animal.gender + '</li>'
       template += '<li><strong>' + 'Family: </strong>' + animal.family + '</li>'
       if(animal.status === 'adopted') {
-        template += '<li><a href="#" class="adopt-link" data-id="' + animal._id + '">Abandon</li>'
+        template += '<li><a href="#" class="adopt-link" data-status="adopted" data-id="' + animal._id + '">Abandon</li>'
       } else {
-        template += '<li><a href="#" class="adopt-link" data-id="' + animal._id + '">Adopt</li>'
+        template += '<li><a href="#" class="adopt-link" data-status="orphan" data-id="' + animal._id + '">Adopt</li>'
       }
       template += '</ul>'
       template += '</li>';

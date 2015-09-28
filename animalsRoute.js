@@ -43,6 +43,21 @@ router.post('/', function(req, res){
   res.json(newAnimal);
 })
 
+// UPDATE
+
+//actually we're just using this route to change the adoption status
+//so this is more a custom route really
+
+router.put('/:id', function(req, res){
+  var outcome;
+  req.body.status === 'orphan' ? outcome = 'adopted' : outcome = 'orphan';
+
+  Animal.findByIdAndUpdate({_id: req.params.id}, {status: outcome}, {}, function(err, result){
+    if(err) console.log(err);
+    res.json(result);
+  })
+})
+
 // test code to save one animal in the mongodb
 
 // var doge = Animal({
